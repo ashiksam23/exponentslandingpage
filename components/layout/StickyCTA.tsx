@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
+import { SITE_CONFIG } from '../../constants';
 
 export const StickyCTA: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -31,12 +32,12 @@ export const StickyCTA: React.FC = () => {
             <div className="hidden sm:flex items-center gap-2">
               <span className="w-2 h-2 bg-brand-red animate-pulse"></span>
               <p className="text-brand-black dark:text-white text-xs uppercase tracking-widest font-bold transition-colors duration-300">
-                System Ready
+                Revenue Leak Detected
               </p>
             </div>
             <div className="flex items-center gap-4 w-full sm:w-auto justify-end">
-              <Button variant="primary" size="sm" fullWidth className="sm:w-auto">
-                Book Activation Call
+              <Button variant="primary" size="sm" fullWidth className="sm:w-auto" onClick={() => window.location.href = SITE_CONFIG.ctaLink}>
+                {SITE_CONFIG.ctaText}
               </Button>
             </div>
           </div>

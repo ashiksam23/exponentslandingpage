@@ -5,22 +5,20 @@ export const Quantification: React.FC = () => {
   
   // Chart Logic (Custom SVG to remove heavy dependencies)
   // Canvas: 400x300
-  // Y-Axis: -12000 to +8000
-  // Range: 20000 units
-  // Zero Line: at 60% down (12000/20000)
+  // Range: -10000 to +10000 (Total 20000)
+  // Zero Line: Center
   
   const chartHeight = 250;
   const chartWidth = 350;
-  const zeroY = chartHeight * 0.65; // Where the 0 line sits
+  const zeroY = chartHeight * 0.6; 
   
-  // Scale factor: roughly 20000 units fit in 250px
   const scale = chartHeight / 20000; 
   
   const bar1Value = -10000;
   const bar1Height = Math.abs(bar1Value) * scale;
   const bar1Color = '#525252';
   
-  const bar2Value = 5500;
+  const bar2Value = 7000;
   const bar2Height = Math.abs(bar2Value) * scale;
   const bar2Color = '#E24A37';
 
@@ -31,35 +29,41 @@ export const Quantification: React.FC = () => {
         {/* Data Table */}
         <div className="p-8 md:p-16 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-brand-neutral-200 dark:border-brand-neutral-800">
           <h2 className="text-3xl font-bold text-brand-black dark:text-white mb-2 uppercase tracking-tight transition-colors duration-300">
-            Financial Logic
+            The Choice:<br/>
+            Invest or Leak <span className="text-brand-red">$10,000</span>.
           </h2>
-          <p className="text-brand-neutral-500 mb-8 text-sm">
-             Basis: $500/hr founder value.
+          <p className="text-brand-neutral-500 mb-8 text-sm mt-4">
+             We know your worth. As a founder at this stage, every hour you spend on admin is a minimum $500 opportunity cost.
           </p>
 
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-brand-neutral-200 dark:border-brand-neutral-800">
                 <th className="pb-4 font-bold text-brand-neutral-400 dark:text-brand-neutral-500 uppercase tracking-wider text-[10px]">Metric</th>
-                <th className="pb-4 font-bold text-brand-black dark:text-brand-neutral-200 uppercase tracking-wider text-[10px]">Legacy Ops</th>
-                <th className="pb-4 font-bold text-brand-red uppercase tracking-wider text-[10px]">ExponentOS</th>
+                <th className="pb-4 font-bold text-brand-black dark:text-brand-neutral-200 uppercase tracking-wider text-[10px]">Your Leak (Today)</th>
+                <th className="pb-4 font-bold text-brand-red uppercase tracking-wider text-[10px]">ExponentOS (Gain)</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-brand-neutral-100 dark:divide-brand-neutral-900">
               <tr>
-                <td className="py-4 text-brand-neutral-600 dark:text-brand-neutral-400">Monthly Admin</td>
-                <td className="py-4 text-brand-neutral-800 dark:text-brand-neutral-300">20 Hours</td>
-                <td className="py-4 text-brand-black dark:text-white font-bold">0 Hours</td>
+                <td className="py-4 text-brand-neutral-600 dark:text-brand-neutral-400">Your Time Cost (20h)</td>
+                <td className="py-4 text-brand-neutral-800 dark:text-brand-neutral-300">$10,000 LOSS</td>
+                <td className="py-4 text-brand-black dark:text-white font-bold">$10,000 GAIN</td>
               </tr>
               <tr>
-                <td className="py-4 text-brand-neutral-600 dark:text-brand-neutral-400">Net Value</td>
-                <td className="py-4 text-brand-neutral-400">-$10,000</td>
-                <td className="py-4 text-brand-red font-bold">+$5,500</td>
+                <td className="py-4 text-brand-neutral-600 dark:text-brand-neutral-400">Monthly Investment</td>
+                <td className="py-4 text-brand-neutral-400">N/A</td>
+                <td className="py-4 text-brand-black dark:text-white font-medium">($3,000 Investment)</td>
               </tr>
               <tr>
-                <td className="py-4 text-brand-black dark:text-white font-bold uppercase">ROI</td>
-                <td className="py-4 text-brand-neutral-400">Negative</td>
-                <td className="py-4 text-brand-black dark:text-white font-bold text-xl">222%</td>
+                <td className="py-4 text-brand-neutral-600 dark:text-brand-neutral-400">Net Monthly Value</td>
+                <td className="py-4 text-brand-red font-bold">NEGATIVE</td>
+                <td className="py-4 text-brand-red font-bold">+$7,000 Net Profit</td>
+              </tr>
+              <tr>
+                <td className="py-4 text-brand-black dark:text-white font-bold uppercase">Final ROI</td>
+                <td className="py-4 text-brand-neutral-400">The Cost of Complacency</td>
+                <td className="py-4 text-brand-black dark:text-white font-bold text-xl">~233%</td>
               </tr>
             </tbody>
           </table>
@@ -87,10 +91,8 @@ export const Quantification: React.FC = () => {
                   fill={bar1Color} 
                   className="transition-all duration-500 hover:opacity-80"
                 />
-                {/* Label Value */}
                 <text x="130" y={zeroY + bar1Height + 20} textAnchor="middle" fill="#737373" fontSize="12" fontWeight="bold">-$10k</text>
-                {/* Label Name */}
-                <text x="130" y={zeroY - 10} textAnchor="middle" fill="#737373" fontSize="10" fontWeight="600" className="uppercase">Legacy</text>
+                <text x="130" y={zeroY - 10} textAnchor="middle" fill="#737373" fontSize="10" fontWeight="600" className="uppercase">Status Quo</text>
               </g>
 
               {/* Bar 2: ExponentOS (Positive) */}
@@ -103,9 +105,7 @@ export const Quantification: React.FC = () => {
                   fill={bar2Color} 
                   className="transition-all duration-500 hover:opacity-80"
                 />
-                {/* Label Value */}
-                <text x="270" y={zeroY - bar2Height - 10} textAnchor="middle" fill="#E24A37" fontSize="12" fontWeight="bold">+$5.5k</text>
-                {/* Label Name */}
+                <text x="270" y={zeroY - bar2Height - 10} textAnchor="middle" fill="#E24A37" fontSize="12" fontWeight="bold">+$7k</text>
                 <text x="270" y={zeroY + 20} textAnchor="middle" fill="#737373" fontSize="10" fontWeight="600" className="uppercase">ExponentOS</text>
               </g>
 

@@ -9,19 +9,17 @@ export const Pricing: React.FC = () => {
     <Section id="pricing" className="bg-white dark:bg-brand-black pt-32 pb-32 transition-colors duration-300">
       <div className="mb-20 text-center">
         <h2 className="text-4xl font-bold text-brand-black dark:text-white mb-4 uppercase tracking-tight transition-colors duration-300">
-          System Tiers
+          Choose Your Arsenal.<br/>
+          Ascend to Operational Mastery.
         </h2>
         <p className="text-brand-neutral-500 uppercase tracking-widest text-xs">
-          Scale your vision. Eliminate noise.
+          ExponentOS is a strategic investment that scales with your ambition.
         </p>
       </div>
 
       <div className="max-w-[1600px] mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 border-t border-l border-brand-neutral-200 dark:border-brand-neutral-800 transition-colors duration-300">
           {PRICING_TIERS.map((tier, index) => {
-            // UI/UX: Invert the highlighted card for maximum contrast
-            // Light Mode: Highlight is Black BG. Dark Mode: Highlight is White BG.
-            // This creates a "black hole" or "beacon" effect depending on the mode.
             const isHighlight = tier.highlight;
             
             return (
@@ -45,7 +43,7 @@ export const Pricing: React.FC = () => {
                     </h3>
                     {isHighlight && (
                        <span className="flex items-center gap-2 px-2 py-1 bg-brand-red text-white text-[8px] font-bold uppercase tracking-widest">
-                          Recommended
+                          Strategic
                        </span>
                     )}
                   </div>
@@ -76,7 +74,6 @@ export const Pricing: React.FC = () => {
 
                 <div className="mt-auto">
                   <Button 
-                    // Invert button logic for the highlighted card
                     variant={isHighlight ? 'secondary' : 'outline'} 
                     fullWidth 
                     size="sm"

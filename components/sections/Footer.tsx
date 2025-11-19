@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '../ui/Button';
+import { SITE_CONFIG } from '../../constants';
 
 export const Footer: React.FC = () => {
   return (
@@ -13,10 +14,9 @@ export const Footer: React.FC = () => {
 
       <div className="container mx-auto px-4 flex flex-col items-center text-center relative z-10">
         
-        {/* Brand Name - Split Styling */}
-        <h2 className="text-6xl md:text-9xl font-bold mb-12 tracking-tighter uppercase leading-none select-none transition-colors duration-300">
-          <span className="text-brand-black dark:text-white transition-colors duration-300">Exponent</span>
-          <span className="text-brand-red">OS</span>
+        <h2 className="text-5xl md:text-8xl font-bold mb-8 tracking-tighter uppercase leading-[0.9] select-none transition-colors duration-300">
+          Stop Managing.<br/>
+          <span className="text-brand-red">Lead Now.</span>
         </h2>
 
         <div className="max-w-3xl mx-auto mb-20">
@@ -31,10 +31,10 @@ export const Footer: React.FC = () => {
               size="lg" 
               className="w-full sm:w-auto px-12 py-4 text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[5px_5px_0px_0px_rgba(255,255,255,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
             >
-              Book Activation Call
+              {SITE_CONFIG.ctaText}
             </Button>
             <span className="text-[10px] uppercase tracking-widest text-brand-neutral-400">
-              Limited Availability for Q3 2024
+              We guarantee a clear path to ROI. Ask us about our 30-Day Value Guarantee.
             </span>
           </div>
         </div>
