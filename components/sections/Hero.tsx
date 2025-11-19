@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Button } from '../ui/Button';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 export const Hero: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -148,7 +148,7 @@ export const Hero: React.FC = () => {
 
   // Infinity Loop Path
   const infinityPath = "M 60 30 L 90 2 L 118 30 L 90 58 L 60 30 L 30 58 L 2 30 L 30 2 Z";
-  const logoPathVariant = {
+  const logoPathVariant: Variants = {
     hidden: { pathLength: 0, opacity: 0 },
     visible: { 
       pathLength: 1, 
