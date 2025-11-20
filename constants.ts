@@ -2,7 +2,7 @@ import { Monitor, Repeat, Inbox, Brain, Activity, Shield } from 'lucide-react';
 import { Feature, Tier, ComparisonItem } from './types';
 
 export const SITE_CONFIG = {
-  ctaLink: "#book-call",
+  ctaLink: "https://calendar.app.google/w9U9vMTWTaDKa9gi9",
   ctaText: "CLAIM YOUR 15-MIN STRATEGIC BRIEFING"
 };
 

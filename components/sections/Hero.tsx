@@ -170,7 +170,7 @@ export const Hero: React.FC = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen flex flex-col items-center justify-center bg-white dark:bg-brand-black pt-24 pb-24 border-b border-brand-neutral-200 dark:border-brand-neutral-900 transition-colors duration-300 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center bg-white dark:bg-brand-black pt-32 pb-16 md:pt-24 md:pb-24 border-b border-brand-neutral-200 dark:border-brand-neutral-900 transition-colors duration-300 overflow-hidden"
     >
       <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none" />
       
@@ -225,11 +225,11 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="max-w-5xl"
         >
-          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold text-brand-black dark:text-white tracking-tighter mb-10 leading-[0.9] uppercase transition-colors duration-300">
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold text-brand-black dark:text-white tracking-tighter mb-8 md:mb-10 leading-[0.9] uppercase transition-colors duration-300">
             The 1x Founder<br/>Is <span className="text-brand-neutral-400 dark:text-brand-neutral-600 line-through decoration-brand-red decoration-4">Dead</span>.
           </h1>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-red tracking-tight uppercase mb-10 leading-none">
+          <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold text-brand-red tracking-tight uppercase mb-8 md:mb-10 leading-none">
              Install Operational Sovereignty.
           </h2>
 
@@ -247,7 +247,7 @@ export const Hero: React.FC = () => {
       </div>
       
       {/* Angular Scroll Indicator */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10 pointer-events-none">
         <span className="text-[10px] uppercase tracking-widest text-brand-neutral-400 vertical-text">The Trap</span>
         <div className="w-[1px] h-16 bg-brand-neutral-200 dark:bg-brand-neutral-800 overflow-hidden relative">
           <div className="absolute top-0 left-0 w-full h-1/2 bg-brand-red animate-slide-down"></div>

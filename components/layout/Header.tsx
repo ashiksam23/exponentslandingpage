@@ -1,7 +1,5 @@
 import React from 'react';
 import { ThemeToggle } from '../ui/ThemeToggle';
-import { Button } from '../ui/Button';
-import { SITE_CONFIG } from '../../constants';
 
 interface HeaderProps {
   isDark: boolean;
@@ -61,15 +59,6 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
           <div className="w-px h-6 bg-brand-neutral-200 dark:bg-brand-neutral-800 hidden md:block"></div>
           
           <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
-          
-          <Button 
-            variant="primary" 
-            size="sm" 
-            className="hidden sm:flex shadow-none"
-            onClick={() => window.location.href = SITE_CONFIG.ctaLink}
-          >
-            Access
-          </Button>
         </div>
       </div>
     </header>

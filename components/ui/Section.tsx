@@ -23,7 +23,7 @@ export const Section: React.FC<SectionProps> = ({
       id={id} 
       className={`
         relative w-full overflow-hidden transition-colors duration-300 group
-        ${noPadding ? '' : 'py-24'} 
+        ${noPadding ? '' : 'py-16 md:py-24'} 
         ${borderTop ? 'border-t border-brand-neutral-200 dark:border-brand-neutral-800' : ''}
         ${borderBottom ? 'border-b border-brand-neutral-200 dark:border-brand-neutral-800' : ''}
         ${className}

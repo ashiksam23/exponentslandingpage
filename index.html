@@ -19,10 +19,11 @@
           extend: {
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
+              mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", 'monospace'],
             },
             colors: {
               brand: {
-                black: '#000000',
+                black: '#050505', // Darker, richer black
                 white: '#FFFFFF',
                 red: '#E24A37',
                 neutral: {
@@ -40,6 +41,10 @@
                 }
               }
             },
+            backgroundImage: {
+              'grid-pattern': "linear-gradient(to right, #262626 1px, transparent 1px), linear-gradient(to bottom, #262626 1px, transparent 1px)",
+              'grid-pattern-light': "linear-gradient(to right, #e5e5e5 1px, transparent 1px), linear-gradient(to bottom, #e5e5e5 1px, transparent 1px)",
+            },
             letterSpacing: {
               tighter: '-0.05em',
               tight: '-0.025em',
@@ -50,11 +55,16 @@
             },
             animation: {
               'slide-down': 'slide-down 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'scan-line': 'scan-line 2s linear infinite',
             },
             keyframes: {
               'slide-down': {
                 '0%': { transform: 'translateY(-100%)' },
                 '100%': { transform: 'translateY(100%)' },
+              },
+              'scan-line': {
+                '0%': { transform: 'translateY(-100%)' },
+                '100%': { transform: 'translateY(200%)' },
               }
             }
           }
@@ -63,7 +73,7 @@
     </script>
     <style>
       body {
-        background-color: #000000;
+        background-color: #050505;
         color: #FFFFFF;
         font-family: 'Inter', sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -110,6 +120,31 @@
         text-orientation: mixed;
         transform: rotate(180deg);
       }
+      
+      /* Global Grid Overlay */
+      .bg-grid-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: -1;
+        background-size: 40px 40px;
+        mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        opacity: 0.05;
+      }
+      
+      html.dark .bg-grid-fixed {
+        background-image: linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px);
+        opacity: 0.05;
+      }
+      
+      html.light .bg-grid-fixed {
+        background-image: linear-gradient(to right, #000000 1px, transparent 1px), linear-gradient(to bottom, #000000 1px, transparent 1px);
+        opacity: 0.05;
+      }
     </style>
 <script type="importmap">
 {
@@ -126,6 +161,7 @@
 </script>
 </head>
   <body>
+    <div class="bg-grid-fixed"></div>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

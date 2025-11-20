@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Sun, Moon } from 'lucide-react';
 
 interface ThemeToggleProps {
   isDark: boolean;
@@ -10,40 +11,35 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ isDark, toggleTheme })
   return (
     <button
       onClick={toggleTheme}
-      className="relative flex items-center p-1 gap-1 bg-white dark:bg-brand-black border border-brand-neutral-200 dark:border-brand-neutral-800 transition-colors duration-300 group shadow-sm hover:shadow-md hover:border-brand-red/50"
+      className="relative flex items-center p-1 w-[72px] h-[36px] bg-brand-neutral-100 dark:bg-brand-neutral-950 border border-brand-neutral-200 dark:border-brand-neutral-800 transition-all duration-300 hover:border-brand-red/50 hover:shadow-[0_0_10px_rgba(226,74,55,0.15)] group"
       aria-label="Toggle Theme"
     >
-      {/* The sliding background */}
+      {/* The sliding pill background */}
       <motion.div
-        className="absolute top-1 bottom-1 w-[calc(50%-4px)] bg-brand-black dark:bg-white pointer-events-none"
+        className="absolute top-1 bottom-1 left-1 w-[30px] bg-white dark:bg-brand-neutral-800 shadow-[0_1px_2px_rgba(0,0,0,0.1)] border border-brand-neutral-200 dark:border-brand-neutral-700 pointer-events-none"
         initial={false}
         animate={{
-          x: isDark ? "100%" : "0%",
-          left: isDark ? "4px" : "4px" // adjustment for padding
+          x: isDark ? 32 : 0, // Travel distance: (72px width - 2px border - 8px padding) - 30px pill = 32px
         }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
       />
 
       {/* Light Option */}
-      <div className="relative z-10 px-3 py-1.5 min-w-[50px] sm:min-w-[60px] text-center cursor-pointer">
-        <span 
-          className={`text-[10px] font-bold uppercase tracking-widest transition-colors duration-200 ${
-            !isDark ? 'text-white' : 'text-brand-neutral-400 group-hover:text-brand-black dark:group-hover:text-white'
-          }`}
-        >
-          Light
-        </span>
+      <div className="relative z-10 flex-1 flex items-center justify-center h-full">
+        <Sun 
+          className={`w-4 h-4 transition-all duration-300 ${
+            !isDark ? 'text-brand-black scale-100' : 'text-brand-neutral-400 scale-75 hover:text-brand-neutral-500'
+          }`} 
+        />
       </div>
 
       {/* Dark Option */}
-      <div className="relative z-10 px-3 py-1.5 min-w-[50px] sm:min-w-[60px] text-center cursor-pointer">
-        <span 
-          className={`text-[10px] font-bold uppercase tracking-widest transition-colors duration-200 ${
-            isDark ? 'text-brand-black' : 'text-brand-neutral-400 group-hover:text-brand-black'
-          }`}
-        >
-          Dark
-        </span>
+      <div className="relative z-10 flex-1 flex items-center justify-center h-full">
+        <Moon 
+          className={`w-4 h-4 transition-all duration-300 ${
+            isDark ? 'text-white scale-100' : 'text-brand-neutral-400 scale-75 hover:text-brand-neutral-500'
+          }`} 
+        />
       </div>
     </button>
   );

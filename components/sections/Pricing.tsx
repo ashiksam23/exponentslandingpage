@@ -6,13 +6,13 @@ import { Button } from '../ui/Button';
 
 export const Pricing: React.FC = () => {
   return (
-    <Section id="pricing" className="bg-white dark:bg-brand-black pt-32 pb-32 transition-colors duration-300">
-      <div className="mb-20 text-center">
-        <h2 className="text-4xl font-bold text-brand-black dark:text-white mb-4 uppercase tracking-tight transition-colors duration-300">
+    <Section id="pricing" className="bg-white dark:bg-brand-black pt-20 pb-20 md:pt-32 md:pb-32 transition-colors duration-300">
+      <div className="mb-12 md:mb-20 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-brand-black dark:text-white mb-4 uppercase tracking-tight transition-colors duration-300">
           Choose Your Arsenal.<br/>
           Ascend to Operational Mastery.
         </h2>
-        <p className="text-brand-neutral-500 uppercase tracking-widest text-xs">
+        <p className="text-brand-neutral-500 uppercase tracking-widest text-xs px-4">
           ExponentOS is a strategic investment that scales with your ambition.
         </p>
       </div>
@@ -26,7 +26,7 @@ export const Pricing: React.FC = () => {
               <div 
                 key={index} 
                 className={`
-                  flex flex-col p-8 border-r border-b border-brand-neutral-200 dark:border-brand-neutral-800 transition-all duration-300 relative group
+                  flex flex-col p-6 md:p-8 border-r border-b border-brand-neutral-200 dark:border-brand-neutral-800 transition-all duration-300 relative group
                   ${isHighlight 
                     ? 'bg-brand-black dark:bg-brand-neutral-100 text-white dark:text-brand-black scale-[1.02] z-10 shadow-2xl' 
                     : 'bg-transparent hover:bg-brand-neutral-50 dark:hover:bg-brand-neutral-900'}
