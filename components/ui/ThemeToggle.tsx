@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
 import { triggerHaptic } from '../../utils/haptics';
 
@@ -15,38 +15,82 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ isDark, toggleTheme })
     toggleTheme();
   };
 
+  // Animation variants for the icons
+  const iconVariants = {
+    hidden: { scale: 0.5, rotate: -90, opacity: 0 },
+    visible: { scale: 1, rotate: 0, opacity: 1 },
+    exit: { scale: 0.5, rotate: 90, opacity: 0 }
+  };
+
   return (
     <button
       onClick={handleToggle}
-      className="relative flex items-center p-1 w-[72px] h-[36px] bg-brand-neutral-100 dark:bg-brand-neutral-950 border border-brand-neutral-200 dark:border-brand-neutral-800 transition-all duration-300 hover:border-brand-red/50 hover:shadow-[0_0_10px_rgba(226,74,55,0.15)] group"
+      className="relative flex items-center w-[76px] h-[38px] bg-brand-neutral-100 dark:bg-brand-neutral-950 border border-brand-neutral-200 dark:border-brand-neutral-800 transition-colors duration-500 hover:border-brand-neutral-400 dark:hover:border-brand-neutral-600 group overflow-hidden cursor-pointer"
       aria-label="Toggle Theme"
     >
-      {/* The sliding pill background */}
+      {/* The Sliding Mechanical Pill */}
       <motion.div
-        className="absolute top-1 bottom-1 left-1 w-[30px] bg-white dark:bg-brand-neutral-800 shadow-[0_1px_2px_rgba(0,0,0,0.1)] border border-brand-neutral-200 dark:border-brand-neutral-700 pointer-events-none"
+        className="absolute top-[3px] bottom-[3px] w-[34px] bg-white dark:bg-brand-neutral-800 border border-brand-neutral-300 dark:border-brand-neutral-700 shadow-sm z-0"
         initial={false}
         animate={{
-          x: isDark ? 32 : 0, // Travel distance: (72px width - 2px border - 8px padding) - 30px pill = 32px
+          x: isDark ? 37 : 3, // Calculated based on container width minus margins
         }}
-        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        transition={{ 
+          type: "spring", 
+          stiffness: 500, 
+          damping: 30,
+          mass: 1
+        }}
       />
 
-      {/* Light Option */}
-      <div className="relative z-10 flex-1 flex items-center justify-center h-full">
-        <Sun 
-          className={`w-4 h-4 transition-all duration-300 ${
-            !isDark ? 'text-brand-black scale-100' : 'text-brand-neutral-400 scale-75 hover:text-brand-neutral-500'
-          }`} 
-        />
+      {/* Light Mode Zone */}
+      <div className="relative z-10 flex-1 flex items-center justify-center h-full w-1/2">
+        <div className="relative">
+          {!isDark && (
+            <motion.div 
+              className="absolute inset-0 -m-2 rounded-full bg-brand-neutral-400/20"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1.5, opacity: [0.3, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          )}
+          <motion.div
+            animate={{ 
+              scale: !isDark ? 1 : 0.7,
+              rotate: !isDark ? 0 : -45,
+              opacity: !isDark ? 1 : 0.5,
+              color: !isDark ? '#050505' : '#A8A29E' // brand-black vs brand-neutral-400
+            }}
+            transition={{ duration: 0.3 }}
+          >
+            <Sun className="w-4 h-4" />
+          </motion.div>
+        </div>
       </div>
 
-      {/* Dark Option */}
-      <div className="relative z-10 flex-1 flex items-center justify-center h-full">
-        <Moon 
-          className={`w-4 h-4 transition-all duration-300 ${
-            isDark ? 'text-white scale-100' : 'text-brand-neutral-400 scale-75 hover:text-brand-neutral-500'
-          }`} 
-        />
+      {/* Dark Mode Zone */}
+      <div className="relative z-10 flex-1 flex items-center justify-center h-full w-1/2">
+        <div className="relative">
+          {isDark && (
+             <motion.div 
+              className="absolute inset-0 -m-2 rounded-full bg-brand-neutral-500/20"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1.5, opacity: [0.3, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          )}
+          <motion.div
+            animate={{ 
+              scale: isDark ? 1 : 0.7,
+              rotate: isDark ? 0 : 45,
+              opacity: isDark ? 1 : 0.5,
+              color: isDark ? '#FFFFFF' : '#A8A29E' // white vs brand-neutral-400
+            }}
+            transition={{ duration: 0.3 }}
+          >
+            <Moon className="w-4 h-4" />
+          </motion.div>
+        </div>
       </div>
     </button>
   );
