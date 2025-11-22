@@ -113,37 +113,22 @@ export const Hero: React.FC = () => {
       const isDark = document.documentElement.classList.contains('dark');
       const currentScroll = window.scrollY;
       
-      // Update mouse position relative to canvas, accounting for scroll
-      // Canvas top is at 0 relative to document, so relative to viewport it is -currentScroll
-      // MouseY (canvas) = MouseY (client) - CanvasTop (viewport) = ClientY - (-ScrollY) = ClientY + ScrollY
-      // However, since we are drawing particles with a parallax offset, we need to align the coordinate spaces.
-      
+      // Calculate Parallax Offset
+      // As we scroll down, the canvas (fixed in section) moves up.
+      // To make particles appear to move SLOWER than the container (depth),
+      // we shift them DOWN (positive Y) based on scroll.
       const parallaxOffset = currentScroll * parallaxFactor;
 
-      // Calculate effective mouse position within the parallax coordinate space
-      // We want: mouseY_visual = particleY_visual
-      // particleY_visual = p.y + parallaxOffset
-      // mouse pos in canvas (standard) = mouse.rawY - rect.top ≈ mouse.rawY + currentScroll
-      // To interact with the visually shifted particle, we use the standard canvas mouse Y?
-      // Actually: dist = sqrt((px_vis - mx)^2 + (py_vis - my)^2)
-      // mx = mouse.rawX
-      // my = mouse.rawY + currentScroll (Since canvas itself moves up with the document flow)
-      
-      // Wait! The canvas element is `absolute inset-0` of the Hero section.
-      // The Hero section moves up with scroll.
-      // So the canvas coordinate system moves up.
-      // A point (0,0) on canvas is at (0, -currentScroll) on screen.
-      // A particle at (x, y) is at (x, y - currentScroll) on screen.
-      // With parallax: (x, y + offset) is at (x, y + offset - currentScroll) on screen.
-      // Mouse is at (rawX, rawY) on screen.
-      // Diff X = x - rawX
-      // Diff Y = (y + offset - currentScroll) - rawY
-      
-      // Let's simplify:
-      // dx = p.x - mouse.rawX (assuming left=0)
-      // dy = (p.y + parallaxOffset) - (mouse.rawY + currentScroll)
-      
-      // Note: This assumes Hero is at top of page (top=0).
+      // Note on Mouse Interaction with Parallax:
+      // The canvas element is `absolute inset-0` in the Hero.
+      // The Hero section moves up with scroll: Top = -currentScroll.
+      // A particle drawn at `y + parallaxOffset` inside the canvas is at:
+      // Screen Y = (Canvas Top) + (y + parallaxOffset)
+      // Screen Y = -currentScroll + y + (currentScroll * 0.3)
+      // Screen Y = y - (0.7 * currentScroll)
+      //
+      // Mouse Y is clientY.
+      // Distance Y = Screen Y - Mouse Y
       
       particles.forEach((p, i) => {
         p.update();
@@ -163,10 +148,15 @@ export const Hero: React.FC = () => {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < connectionDistance) {
-            // Interaction Logic
-            const dxMouse = p.x - mouse.rawX;
-            // Adjust mouse Y calculation for parallax context
-            const dyMouse = drawY - (mouse.rawY + currentScroll);
+            // Interaction Logic: Map particle screen pos to mouse screen pos
+            // Particle Screen X = p.x (since canvas left is 0)
+            // Particle Screen Y = drawY - currentScroll (since canvas top is -currentScroll relative to viewport)
+            
+            const pScreenX = p.x;
+            const pScreenY = drawY - currentScroll;
+            
+            const dxMouse = pScreenX - mouse.rawX;
+            const dyMouse = pScreenY - mouse.rawY;
             const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
 
             ctx.beginPath();
