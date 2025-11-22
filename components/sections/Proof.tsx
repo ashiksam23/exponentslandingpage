@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Section } from '../ui/Section';
 import { FEATURES } from '../../constants';
 import { Square, Zap, Box, ArrowRight, Database } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { triggerHaptic } from '../../utils/haptics';
 
 export const Proof: React.FC = () => {
@@ -17,7 +16,7 @@ export const Proof: React.FC = () => {
     }
   };
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -27,7 +26,7 @@ export const Proof: React.FC = () => {
     }
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, x: 50 },
     show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } }
   };

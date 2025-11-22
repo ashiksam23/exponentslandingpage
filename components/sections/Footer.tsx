@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
              <p>All Systems Operational</p>
           </div>
           <p>
-            &copy; {new Date().getFullYear()} <span className="text-brand-black dark:text-brand-black font-bold">Exponent</span><span className="text-brand-red font-bold">OS</span> Inc.
+            &copy; {new Date().getFullYear()} <span className="text-brand-black dark:text-white font-bold">Exponent</span><span className="text-brand-red font-bold">OS</span> Inc.
           </p>
           <div className="flex gap-8">
             <a href="#" className="hover:text-brand-black dark:hover:text-white transition-colors">Privacy</a>
