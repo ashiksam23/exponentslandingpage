@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { SITE_CONFIG } from '../../constants';
+import { triggerHaptic } from '../../utils/haptics';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -38,8 +40,16 @@ export const Button: React.FC<ButtonProps> = ({
   const widthClass = fullWidth ? "w-full" : "";
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // Tactile feedback
+    triggerHaptic('medium');
+    
     if (props.onClick) props.onClick(e);
-    window.location.href = SITE_CONFIG.ctaLink;
+    
+    // Only redirect if no custom onClick was provided or if explicit redirect is desired.
+    // The original logic implies buttons generally lead to CTA, but let's allow flexibility.
+    if (!props.onClick) {
+      window.location.href = SITE_CONFIG.ctaLink;
+    }
   };
 
   return (

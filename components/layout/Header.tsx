@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { ThemeToggle } from '../ui/ThemeToggle';
+import { triggerHaptic } from '../../utils/haptics';
 
 interface HeaderProps {
   isDark: boolean;
@@ -8,6 +10,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
   const scrollToSection = (id: string) => {
+    triggerHaptic('light');
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -23,7 +26,10 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
         {/* Logo */}
         <div 
           className="flex items-center gap-3 cursor-pointer group" 
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => {
+            triggerHaptic('light');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
         >
           {/* Logo Mark - Infinity Loop */}
           <div className="h-6 w-12 relative text-brand-black dark:text-white group-hover:text-brand-red transition-colors duration-300">

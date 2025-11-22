@@ -1,5 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Section } from '../ui/Section';
+import { motion, useAnimation, useInView } from 'framer-motion';
+
+// Helper component for counting numbers
+const CountUp = ({ end, prefix = "", suffix = "" }: { end: number, prefix?: string, suffix?: string }) => {
+  const [count, setCount] = useState(0);
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (isInView) {
+      let start = 0;
+      const duration = 2000;
+      const increment = end / (duration / 16); // 60fps
+      
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= end) {
+          setCount(end);
+          clearInterval(timer);
+        } else {
+          setCount(Math.floor(start));
+        }
+      }, 16);
+
+      return () => clearInterval(timer);
+    }
+  }, [end, isInView]);
+
+  return <span ref={ref}>{prefix}{count.toLocaleString()}{suffix}</span>;
+};
 
 export const Quantification: React.FC = () => {
   
@@ -9,11 +39,9 @@ export const Quantification: React.FC = () => {
   
   const bar1Value = -10000;
   const bar1Height = Math.abs(bar1Value) * scale;
-  const bar1Color = '#333333'; // Dark grey for loss
   
   const bar2Value = 7000;
   const bar2Height = Math.abs(bar2Value) * scale;
-  const bar2Color = '#E24A37'; // Brand red for gain
 
   return (
     <Section className="bg-white dark:bg-brand-black border-b border-brand-neutral-200 dark:border-brand-neutral-900">
@@ -24,19 +52,37 @@ export const Quantification: React.FC = () => {
           {/* Background Tech Decoration */}
           <div className="absolute top-0 right-0 p-4 opacity-20">
              <div className="grid grid-cols-3 gap-1">
-               {[...Array(9)].map((_,i) => <div key={i} className="w-1 h-1 bg-brand-black dark:bg-white"></div>)}
+               {[...Array(9)].map((_,i) => <motion.div 
+                 key={i} 
+                 className="w-1 h-1 bg-brand-black dark:bg-white"
+                 initial={{ opacity: 0.2 }}
+                 animate={{ opacity: [0.2, 1, 0.2] }}
+                 transition={{ duration: 2, delay: i * 0.1, repeat: Infinity }}
+               />)}
              </div>
           </div>
 
-          <h2 className="text-3xl font-bold text-brand-black dark:text-white mb-2 uppercase tracking-tight transition-colors duration-300 z-10">
-            Financial<br/>
-            <span className="text-brand-red">Impact Analysis</span>
-          </h2>
-          <p className="text-brand-neutral-500 mb-8 text-sm mt-4 z-10 max-w-md">
-             We know your worth. Every hour you spend on admin is a minimum $500 opportunity cost.
-          </p>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-brand-black dark:text-white mb-2 uppercase tracking-tight transition-colors duration-300 z-10">
+              Financial<br/>
+              <span className="text-brand-red">Impact Analysis</span>
+            </h2>
+            <p className="text-brand-neutral-500 mb-8 text-sm mt-4 z-10 max-w-md">
+               We know your worth. Every hour you spend on admin is a minimum $500 opportunity cost.
+            </p>
+          </motion.div>
 
-          <div className="relative z-10 bg-white dark:bg-brand-black border border-brand-neutral-200 dark:border-brand-neutral-800 p-6 shadow-lg">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="relative z-10 bg-white dark:bg-brand-black border border-brand-neutral-200 dark:border-brand-neutral-800 p-6 shadow-lg"
+          >
             <table className="w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-brand-neutral-200 dark:border-brand-neutral-800">
@@ -55,15 +101,19 @@ export const Quantification: React.FC = () => {
                 </tr>
                 <tr>
                   <td className="py-4 font-bold text-brand-black dark:text-white">Net Monthly Value</td>
-                  <td className="py-4 text-right font-bold font-mono text-brand-red">+$7,000</td>
+                  <td className="py-4 text-right font-bold font-mono text-brand-red">
+                    +<CountUp end={7000} prefix="$" />
+                  </td>
                 </tr>
                 <tr className="bg-brand-neutral-50 dark:bg-brand-neutral-900">
                   <td className="py-4 pl-2 font-bold uppercase text-xs text-brand-black dark:text-white">ROI Projected</td>
-                  <td className="py-4 pr-2 text-right font-bold text-xl text-brand-black dark:text-white">233%</td>
+                  <td className="py-4 pr-2 text-right font-bold text-xl text-brand-black dark:text-white">
+                    <CountUp end={233} suffix="%" />
+                  </td>
                 </tr>
               </tbody>
             </table>
-          </div>
+          </motion.div>
         </div>
 
         {/* HUD Chart Visualization */}
@@ -83,40 +133,69 @@ export const Quantification: React.FC = () => {
               <line x1="40" y1={zeroY} x2="360" y2={zeroY} stroke="#525252" strokeWidth="1" strokeDasharray="4 4" />
               <line x1="40" y1="0" x2="40" y2="300" stroke="#333" strokeWidth="1" />
 
-              {/* Bar 1: Legacy (Negative) - With Warning Stripes */}
+              {/* Bar 1: Legacy (Negative) */}
               <g className="group">
                 <defs>
                   <pattern id="diagonalHatch" width="4" height="4" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
                     <line x1="0" y1="0" x2="0" y2="4" style={{stroke:'#262626', strokeWidth:1}} />
                   </pattern>
                 </defs>
-                <rect 
+                <motion.rect 
                   x="100" 
                   y={zeroY} 
                   width="60" 
-                  height={bar1Height} 
+                  initial={{ height: 0 }}
+                  whileInView={{ height: bar1Height }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.5 }}
                   fill="url(#diagonalHatch)"
                   stroke="#525252"
                   strokeWidth="1"
-                  className="transition-all duration-500"
                 />
-                <text x="130" y={zeroY + bar1Height + 25} textAnchor="middle" fill="#737373" fontSize="14" fontWeight="bold" fontFamily="monospace">-$10k</text>
+                <motion.text 
+                  initial={{ opacity: 0, y: zeroY + 10 }}
+                  whileInView={{ opacity: 1, y: zeroY + bar1Height + 25 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 1.5 }}
+                  x="130" 
+                  textAnchor="middle" 
+                  fill="#737373" 
+                  fontSize="14" 
+                  fontWeight="bold" 
+                  fontFamily="monospace"
+                >
+                  -$10k
+                </motion.text>
                 <text x="130" y={zeroY - 10} textAnchor="middle" fill="#525252" fontSize="10" fontWeight="600" className="uppercase tracking-widest">Status Quo</text>
               </g>
 
-              {/* Bar 2: ExponentOS (Positive) - Solid Power */}
+              {/* Bar 2: ExponentOS (Positive) */}
               <g className="group">
-                <rect 
+                <motion.rect 
                   x="240" 
-                  y={zeroY - bar2Height} 
-                  width="60" 
-                  height={bar2Height} 
+                  y={zeroY} 
+                  width="60"
+                  initial={{ height: 0, y: zeroY }}
+                  whileInView={{ height: bar2Height, y: zeroY - bar2Height }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.5 }}
                   fill="#E24A37" 
-                  className="transition-all duration-500 hover:brightness-110 shadow-[0_0_20px_rgba(226,74,55,0.5)]"
+                  className="hover:brightness-110 shadow-[0_0_20px_rgba(226,74,55,0.5)]"
                 />
-                <rect x="240" y={zeroY - bar2Height} width="60" height="4" fill="#fff" opacity="0.5" />
-                
-                <text x="270" y={zeroY - bar2Height - 15} textAnchor="middle" fill="#E24A37" fontSize="14" fontWeight="bold" fontFamily="monospace">+$7k</text>
+                <motion.text 
+                   initial={{ opacity: 0, y: zeroY - 10 }}
+                   whileInView={{ opacity: 1, y: zeroY - bar2Height - 15 }}
+                   viewport={{ once: true }}
+                   transition={{ delay: 1.5 }}
+                   x="270" 
+                   textAnchor="middle" 
+                   fill="#E24A37" 
+                   fontSize="14" 
+                   fontWeight="bold" 
+                   fontFamily="monospace"
+                >
+                  +$7k
+                </motion.text>
                 <text x="270" y={zeroY + 25} textAnchor="middle" fill="#737373" fontSize="10" fontWeight="600" className="uppercase tracking-widest">ExponentOS</text>
               </g>
             </svg>

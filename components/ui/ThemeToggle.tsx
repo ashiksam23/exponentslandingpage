@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
+import { triggerHaptic } from '../../utils/haptics';
 
 interface ThemeToggleProps {
   isDark: boolean;
@@ -8,9 +10,14 @@ interface ThemeToggleProps {
 }
 
 export const ThemeToggle: React.FC<ThemeToggleProps> = ({ isDark, toggleTheme }) => {
+  const handleToggle = () => {
+    triggerHaptic('medium');
+    toggleTheme();
+  };
+
   return (
     <button
-      onClick={toggleTheme}
+      onClick={handleToggle}
       className="relative flex items-center p-1 w-[72px] h-[36px] bg-brand-neutral-100 dark:bg-brand-neutral-950 border border-brand-neutral-200 dark:border-brand-neutral-800 transition-all duration-300 hover:border-brand-red/50 hover:shadow-[0_0_10px_rgba(226,74,55,0.15)] group"
       aria-label="Toggle Theme"
     >
