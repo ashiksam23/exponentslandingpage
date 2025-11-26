@@ -12,14 +12,35 @@ export const BlogPost: React.FC<BlogPostProps> = ({ onNavigate }) => {
   
   // SEO Injection
   useEffect(() => {
+    // 1. Set Title
     document.title = "The Operational Sovereignty Blueprint | ExponentOS";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', "Stuck at $3M? Discover the ExponentOS model and learn how to decouple revenue from headcount using AI-augmented operations and human-in-the-loop workflows.");
-    }
+
+    // 2. Define the specific description
+    const descriptionText = "Stuck at $3M? Discover the ExponentOS model and learn how to decouple revenue from headcount using AI-augmented operations and human-in-the-loop workflows.";
+
+    // 3. Helper to safely update meta tags
+    const updateMeta = (selector: string, content: string) => {
+      const element = document.querySelector(selector);
+      if (element) {
+        element.setAttribute('content', content);
+      }
+    };
+
+    // 4. Update all relevant meta tags
+    updateMeta('meta[name="description"]', descriptionText);
+    updateMeta('meta[property="og:description"]', descriptionText);
+    updateMeta('meta[property="twitter:description"]', descriptionText);
+
+    // 5. Scroll to top
     window.scrollTo(0, 0);
+
+    // 6. Cleanup on unmount (Reset to default site description)
     return () => {
       document.title = "ExponentOS | The Leverage Operating System for Founders";
+      const defaultDesc = "Stop trading your genius for administrative chaos. ExponentOS installs operational sovereignty with AI-driven executive support, content automation, and strategic logistics.";
+      updateMeta('meta[name="description"]', defaultDesc);
+      updateMeta('meta[property="og:description"]', defaultDesc);
+      updateMeta('meta[property="twitter:description"]', defaultDesc);
     };
   }, []);
 
