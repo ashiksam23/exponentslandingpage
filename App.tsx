@@ -1,24 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from './components/layout/Header';
-import { Hero } from './components/sections/Hero';
-import { Diagnosis } from './components/sections/Diagnosis';
-import { SystemArchitecture } from './components/sections/SystemArchitecture';
-import { Proof } from './components/sections/Proof';
-import { Quantification } from './components/sections/Quantification';
-import { Pricing } from './components/sections/Pricing';
 import { Footer } from './components/sections/Footer';
-import { StickyCTA } from './components/layout/StickyCTA';
+import { Home } from './components/pages/Home';
+import { BlogPost } from './components/pages/BlogPost';
 
 function App() {
   // Default to dark mode
   const [isDark, setIsDark] = useState(true);
+  
+  // Custom Routing State
+  const [currentPage, setCurrentPage] = useState<'home' | 'blueprint'>('home');
 
   // Toggle handler
   const toggleTheme = () => {
     setIsDark(!isDark);
   };
 
-  // Effect to apply the 'dark' class to the html element
+  // Navigation Handler
+  const navigateTo = (page: 'home' | 'blueprint') => {
+    setCurrentPage(page);
+    window.scrollTo(0, 0);
+    
+    // Update URL history for "fake" routing
+    const path = page === 'home' ? '/' : '/blueprint';
+    window.history.pushState({ page }, '', path);
+  };
+
+  // Handle Browser Back Button
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state && event.state.page) {
+        setCurrentPage(event.state.page);
+      } else {
+        // Fallback based on URL
+        const path = window.location.pathname;
+        if (path === '/blueprint') setCurrentPage('blueprint');
+        else setCurrentPage('home');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Theme Effect
   useEffect(() => {
     const html = document.documentElement;
     if (isDark) {
@@ -32,20 +57,17 @@ function App() {
 
   return (
     <main className="w-full min-h-screen bg-white dark:bg-brand-black text-brand-black dark:text-white selection:bg-brand-red selection:text-white transition-colors duration-300">
-      <Header isDark={isDark} toggleTheme={toggleTheme} />
-      <Hero />
-      {/* Section 2: The Problem */}
-      <Diagnosis />
-      {/* Section 3: The Architecture (New) */}
-      <SystemArchitecture />
-      {/* Section 4: The Modules / Proof */}
-      <Proof />
-      {/* Section 5: Benefits / Quantification */}
-      <Quantification />
-      {/* Section 6: Pricing */}
-      <Pricing />
+      <Header 
+        isDark={isDark} 
+        toggleTheme={toggleTheme} 
+        onNavigate={navigateTo}
+        currentPage={currentPage}
+      />
+      
+      {currentPage === 'home' && <Home />}
+      {currentPage === 'blueprint' && <BlogPost onNavigate={navigateTo} />}
+
       <Footer />
-      <StickyCTA />
     </main>
   );
 }

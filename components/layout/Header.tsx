@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { triggerHaptic } from '../../utils/haptics';
@@ -6,14 +5,26 @@ import { triggerHaptic } from '../../utils/haptics';
 interface HeaderProps {
   isDark: boolean;
   toggleTheme: () => void;
+  onNavigate: (page: 'home' | 'blueprint') => void;
+  currentPage: 'home' | 'blueprint';
 }
 
-export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
-  const scrollToSection = (id: string) => {
+export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme, onNavigate, currentPage }) => {
+  
+  const handleScrollTo = (targetId: string) => {
     triggerHaptic('light');
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (currentPage !== 'home') {
+      onNavigate('home');
+      // Delay scroll to allow render
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -28,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
           className="flex items-center gap-3 cursor-pointer group" 
           onClick={() => {
             triggerHaptic('light');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            onNavigate('home');
           }}
         >
           {/* Logo Mark - Infinity Loop */}
@@ -54,11 +65,17 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
         {/* Nav + Actions */}
         <div className="flex items-center gap-4 sm:gap-6">
           <nav className="hidden md:flex items-center gap-8 mr-2">
-            <button onClick={() => scrollToSection('how-it-works')} className="text-xs font-bold uppercase tracking-widest text-brand-neutral-500 hover:text-brand-black dark:text-brand-neutral-400 dark:hover:text-white transition-colors">
+            <button onClick={() => handleScrollTo('how-it-works')} className="text-xs font-bold uppercase tracking-widest text-brand-neutral-500 hover:text-brand-black dark:text-brand-neutral-400 dark:hover:text-white transition-colors">
               Architecture
             </button>
-            <button onClick={() => scrollToSection('pricing')} className="text-xs font-bold uppercase tracking-widest text-brand-neutral-500 hover:text-brand-black dark:text-brand-neutral-400 dark:hover:text-white transition-colors">
+            <button onClick={() => handleScrollTo('pricing')} className="text-xs font-bold uppercase tracking-widest text-brand-neutral-500 hover:text-brand-black dark:text-brand-neutral-400 dark:hover:text-white transition-colors">
               Pricing
+            </button>
+            <button 
+              onClick={() => onNavigate('blueprint')}
+              className={`text-xs font-bold uppercase tracking-widest hover:text-brand-red transition-colors flex items-center gap-1 ${currentPage === 'blueprint' ? 'text-brand-red' : 'text-brand-neutral-500 dark:text-brand-neutral-400'}`}
+            >
+               Blueprint <span className="w-1.5 h-1.5 bg-brand-red rounded-full animate-pulse"></span>
             </button>
           </nav>
           
