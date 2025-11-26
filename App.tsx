@@ -8,8 +8,13 @@ function App() {
   // Default to dark mode
   const [isDark, setIsDark] = useState(true);
   
-  // Custom Routing State
-  const [currentPage, setCurrentPage] = useState<'home' | 'blueprint'>('home');
+  // Custom Routing State - Initialized from URL for deep linking support
+  const [currentPage, setCurrentPage] = useState<'home' | 'blueprint'>(() => {
+    if (typeof window !== 'undefined') {
+      return window.location.pathname === '/blueprint' ? 'blueprint' : 'home';
+    }
+    return 'home';
+  });
 
   // Toggle handler
   const toggleTheme = () => {
