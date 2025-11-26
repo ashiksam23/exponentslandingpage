@@ -8,10 +8,11 @@ function App() {
   // Default to dark mode
   const [isDark, setIsDark] = useState(true);
   
-  // Custom Routing State - Initialized from URL for deep linking support
+  // Custom Hash Router State
   const [currentPage, setCurrentPage] = useState<'home' | 'blueprint'>(() => {
     if (typeof window !== 'undefined') {
-      return window.location.pathname === '/blueprint' ? 'blueprint' : 'home';
+      // Check if the URL has #blueprint
+      return window.location.hash === '#blueprint' ? 'blueprint' : 'home';
     }
     return 'home';
   });
@@ -21,31 +22,35 @@ function App() {
     setIsDark(!isDark);
   };
 
-  // Navigation Handler
+  // Navigation Handler using Hash
   const navigateTo = (page: 'home' | 'blueprint') => {
+    if (page === 'home') {
+      window.location.hash = '';
+      window.scrollTo(0, 0);
+    } else {
+      window.location.hash = 'blueprint';
+      window.scrollTo(0, 0);
+    }
     setCurrentPage(page);
-    window.scrollTo(0, 0);
-    
-    // Update URL history for "fake" routing
-    const path = page === 'home' ? '/' : '/blueprint';
-    window.history.pushState({ page }, '', path);
   };
 
-  // Handle Browser Back Button
+  // Listen for browser back/forward buttons (Hash Change)
   useEffect(() => {
-    const handlePopState = (event: PopStateEvent) => {
-      if (event.state && event.state.page) {
-        setCurrentPage(event.state.page);
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash === '#blueprint') {
+        setCurrentPage('blueprint');
+        window.scrollTo(0, 0);
       } else {
-        // Fallback based on URL
-        const path = window.location.pathname;
-        if (path === '/blueprint') setCurrentPage('blueprint');
-        else setCurrentPage('home');
+        setCurrentPage('home');
       }
     };
 
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    window.addEventListener('hashchange', handleHashChange);
+    // Initial check in case of deep linking
+    handleHashChange();
+
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
   // Theme Effect
