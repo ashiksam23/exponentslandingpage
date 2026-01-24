@@ -42,15 +42,24 @@ function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
+      let page = 'home';
+
       if (hash === '#blueprint') {
         setCurrentPage('blueprint');
+        page = 'blueprint';
         window.scrollTo(0, 0);
       } else if (hash === '#casestudies') {
         setCurrentPage('casestudies');
+        page = 'casestudies';
         window.scrollTo(0, 0);
       } else {
         setCurrentPage('home');
       }
+
+      // Track Page View
+      import('./utils/analytics').then(({ Analytics }) => {
+        Analytics.pageView(page);
+      });
     };
 
     window.addEventListener('hashchange', handleHashChange);

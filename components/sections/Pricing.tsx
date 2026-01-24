@@ -108,6 +108,15 @@ export const Pricing: React.FC = () => {
                     fullWidth
                     size="md"
                     className={isHighlight ? '!border-transparent shadow-lg hover:shadow-xl' : ''}
+                    onClick={() => {
+                      import('../../utils/analytics').then(({ Analytics }) => {
+                        Analytics.track('pricing_plan_selected', {
+                          tier: tier.name,
+                          price: tier.price
+                        });
+                        alert(`Initializing ${tier.name} Protocol... (This would open Stripe checkout)`);
+                      });
+                    }}
                   >
                     Initialize
                   </Button>

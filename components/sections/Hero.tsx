@@ -275,9 +275,9 @@ export const Hero: React.FC = () => {
           className="max-w-6xl"
         >
           <h1 className="text-6xl sm:text-8xl lg:text-9xl font-bold text-brand-black dark:text-white tracking-[-0.05em] mb-8 md:mb-10 leading-[0.85] uppercase transition-colors duration-300 select-none">
-            The 1x Founder<br />Is <span className="relative inline-block text-brand-neutral-300 dark:text-brand-neutral-700">
-              <span className="absolute inset-0 w-full h-[30%] top-[35%] bg-brand-red transform -rotate-2 mix-blend-multiply dark:mix-blend-overlay"></span>
-              <span className="relative z-10 line-through decoration-transparent">Dead</span>
+            The 1x Founder<br />Is <span className="relative inline-block mx-2">
+              <span className="absolute inset-0 w-[110%] -left-[5%] h-[40%] top-[35%] bg-brand-red transform -rotate-2 opacity-80"></span>
+              <span className="relative z-10 text-brand-black dark:text-white line-through decoration-transparent opacity-50">Dead</span>
             </span>.
           </h1>
 
@@ -291,7 +291,17 @@ export const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto">
-            <Button variant="primary" size="lg" className="w-full sm:w-auto min-w-[280px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_#E24A37] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-300 ease-premium text-lg tracking-widest font-bold uppercase">
+            <Button
+              variant="primary"
+              size="lg"
+              className="w-full sm:w-auto min-w-[280px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_#E24A37] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-300 ease-premium text-lg tracking-widest font-bold uppercase"
+              onClick={() => {
+                import('../../utils/analytics').then(({ Analytics }) => {
+                  Analytics.track('hero_cta_clicked', { location: 'hero' });
+                  alert("Initializing Sequence... (This would open the checkout flow)");
+                });
+              }}
+            >
               {SITE_CONFIG.ctaText}
             </Button>
           </div>
