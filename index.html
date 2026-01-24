@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Favicon: Minimalist Red Circle (NotebookLM style) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23E24A37' /%3E%3C/svg%3E" />
-    
-    <!-- Primary Meta Tags -->
-    <title>ExponentOS | The Leverage Operating System for Founders</title>
-    <meta name="title" content="ExponentOS | The Leverage Operating System for Founders">
-    <meta name="description" content="Stop trading your genius for administrative chaos. ExponentOS installs operational sovereignty with AI-driven executive support, content automation, and strategic logistics.">
-    <meta name="keywords" content="fractional COO, executive leverage, business operating system, autonomous admin, CEO productivity, scale up operations, AI operations, ExponentOS, founder leverage, chief of staff ai, executive assistant automation, business scaling software">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="language" content="English">
-    <meta name="author" content="ExponentOS Inc.">
-    <meta name="revisit-after" content="7 days">
-    <meta name="theme-color" content="#050505">
-    <link rel="canonical" href="https://exponentos.com" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://exponentos.com">
-    <meta property="og:title" content="ExponentOS | The Leverage Operating System for Founders">
-    <meta property="og:description" content="Stop trading your genius for administrative chaos. ExponentOS installs operational sovereignty with AI-driven executive support, content automation, and strategic logistics.">
-    <meta property="og:image" content="https://exponentos.com/og-image.jpg">
-    <meta property="og:site_name" content="ExponentOS">
-    <meta property="og:locale" content="en_US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://exponentos.com">
-    <meta property="twitter:title" content="ExponentOS | The Leverage Operating System for Founders">
-    <meta property="twitter:description" content="Stop trading your genius for administrative chaos. ExponentOS installs operational sovereignty with AI-driven executive support, content automation, and strategic logistics.">
-    <meta property="twitter:image" content="https://exponentos.com/og-image.jpg">
-    <meta property="twitter:creator" content="@exponentos">
+  <!-- Favicon: Minimalist Red Circle (NotebookLM style) -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23E24A37' /%3E%3C/svg%3E" />
 
-    <!-- JSON-LD Structured Data for Rich Snippets -->
-    <script type="application/ld+json">
+  <!-- Primary Meta Tags -->
+  <title>ExponentOS | The Leverage Operating System for Founders</title>
+  <meta name="title" content="ExponentOS | The Leverage Operating System for Founders">
+  <meta name="description"
+    content="Stop trading your genius for administrative chaos. ExponentOS installs operational sovereignty with AI-driven executive support, content automation, and strategic logistics.">
+  <meta name="keywords"
+    content="fractional COO, executive leverage, business operating system, autonomous admin, CEO productivity, scale up operations, AI operations, ExponentOS, founder leverage, chief of staff ai, executive assistant automation, business scaling software">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="language" content="English">
+  <meta name="author" content="ExponentOS Inc.">
+  <meta name="revisit-after" content="7 days">
+  <meta name="theme-color" content="#050505">
+  <link rel="canonical" href="https://exponentos.com" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://exponentos.com">
+  <meta property="og:title" content="ExponentOS | The Leverage Operating System for Founders">
+  <meta property="og:description"
+    content="Stop trading your genius for administrative chaos. ExponentOS installs operational sovereignty with AI-driven executive support, content automation, and strategic logistics.">
+  <meta property="og:image" content="https://exponentos.com/og-image.jpg">
+  <meta property="og:site_name" content="ExponentOS">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://exponentos.com">
+  <meta property="twitter:title" content="ExponentOS | The Leverage Operating System for Founders">
+  <meta property="twitter:description"
+    content="Stop trading your genius for administrative chaos. ExponentOS installs operational sovereignty with AI-driven executive support, content automation, and strategic logistics.">
+  <meta property="twitter:image" content="https://exponentos.com/og-image.jpg">
+  <meta property="twitter:creator" content="@exponentos">
+
+  <!-- JSON-LD Structured Data for Rich Snippets -->
+  <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
@@ -94,149 +100,171 @@
       ]
     }
     </script>
-    
-    <!-- Google Fonts: Inter only, no Serif -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", 'monospace'],
-            },
-            colors: {
-              brand: {
-                black: '#050505', // Darker, richer black
-                white: '#FFFFFF',
-                red: '#E24A37',
-                neutral: {
-                  50: '#FAFAF9',
-                  100: '#F5F5F4',
-                  200: '#E7E5E4',
-                  300: '#D6D3D1',
-                  400: '#A8A29E',
-                  500: '#78716C',
-                  600: '#57534E',
-                  700: '#44403C',
-                  800: '#262626', 
-                  900: '#171717', 
-                  950: '#0A0A0A',
-                }
+  <!-- Google Fonts: Inter only, no Serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", 'monospace'],
+          },
+          colors: {
+            brand: {
+              black: '#050505', // Darker, richer black
+              white: '#FFFFFF',
+              red: '#E24A37',
+              neutral: {
+                50: '#F9FAFB',
+                100: '#F3F4F6',
+                200: '#E5E7EB',
+                300: '#D1D5DB',
+                400: '#9CA3AF',
+                500: '#6B7280',
+                600: '#4B5563',
+                700: '#374151',
+                800: '#1F2937',
+                900: '#111827',
+                950: '#030712',
               }
+            }
+          },
+          backgroundImage: {
+            'grid-pattern': "linear-gradient(to right, #262626 1px, transparent 1px), linear-gradient(to bottom, #262626 1px, transparent 1px)",
+            'grid-pattern-light': "linear-gradient(to right, #e5e5e5 1px, transparent 1px), linear-gradient(to bottom, #e5e5e5 1px, transparent 1px)",
+          },
+          letterSpacing: {
+            tighter: '-0.05em',
+            tight: '-0.025em',
+            normal: '0em',
+            wide: '0.025em',
+            wider: '0.05em',
+            widest: '0.1em',
+          },
+          transitionTimingFunction: {
+            'premium': 'cubic-bezier(0.16, 1, 0.3, 1)', // Smooth, expensive feel
+          },
+          animation: {
+            'slide-down': 'slide-down 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'scan-line': 'scan-line 2s linear infinite',
+          },
+          keyframes: {
+            'slide-down': {
+              '0%': { transform: 'translateY(-100%)' },
+              '100%': { transform: 'translateY(100%)' },
             },
-            backgroundImage: {
-              'grid-pattern': "linear-gradient(to right, #262626 1px, transparent 1px), linear-gradient(to bottom, #262626 1px, transparent 1px)",
-              'grid-pattern-light': "linear-gradient(to right, #e5e5e5 1px, transparent 1px), linear-gradient(to bottom, #e5e5e5 1px, transparent 1px)",
-            },
-            letterSpacing: {
-              tighter: '-0.05em',
-              tight: '-0.025em',
-              normal: '0em',
-              wide: '0.025em',
-              wider: '0.05em',
-              widest: '0.1em',
-            },
-            animation: {
-              'slide-down': 'slide-down 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'scan-line': 'scan-line 2s linear infinite',
-            },
-            keyframes: {
-              'slide-down': {
-                '0%': { transform: 'translateY(-100%)' },
-                '100%': { transform: 'translateY(100%)' },
-              },
-              'scan-line': {
-                '0%': { transform: 'translateY(-100%)' },
-                '100%': { transform: 'translateY(200%)' },
-              }
+            'scan-line': {
+              '0%': { transform: 'translateY(-100%)' },
+              '100%': { transform: 'translateY(200%)' },
             }
           }
         }
       }
-    </script>
-    <style>
-      body {
-        background-color: #050505;
-        color: #FFFFFF;
-        font-family: 'Inter', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
-      }
-      
-      /* Light mode override */
-      html.light body {
-        background-color: #FFFFFF;
-        color: #000000;
-      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #050505;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+    }
 
-      /* Custom scrollbar */
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #111; 
-      }
-      html.light ::-webkit-scrollbar-track {
-        background: #f5f5f5;
-      }
-      
-      ::-webkit-scrollbar-thumb {
-        background: #333; 
-        border-radius: 0px;
-      }
-      html.light ::-webkit-scrollbar-thumb {
-        background: #ccc;
-      }
-      
-      ::-webkit-scrollbar-thumb:hover {
-        background: #E24A37; 
-      }
-      
-      /* Remove all default border radius */
-      * {
-        border-radius: 0px !important;
-      }
+    /* Light mode override */
+    html.light body {
+      background-color: #FAFAFA;
+      /* Slightly off-white for premium feel */
+      color: #0A0A0A;
+    }
 
-      /* Vertical Text Utility */
-      .vertical-text {
-        writing-mode: vertical-rl;
-        text-orientation: mixed;
-        transform: rotate(180deg);
-      }
-      
-      /* Global Grid Overlay */
-      .bg-grid-fixed {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        pointer-events: none;
-        z-index: -1;
-        background-size: 40px 40px;
-        mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-        -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-        opacity: 0.05;
-      }
-      
-      html.dark .bg-grid-fixed {
-        background-image: linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px);
-        opacity: 0.05;
-      }
-      
-      html.light .bg-grid-fixed {
-        background-image: linear-gradient(to right, #000000 1px, transparent 1px), linear-gradient(to bottom, #000000 1px, transparent 1px);
-        opacity: 0.05;
-      }
-    </style>
-<script type="importmap">
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      /* Slightly wider for better usability */
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0A0A0A;
+    }
+
+    html.light ::-webkit-scrollbar-track {
+      background: #F0F0F0;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #262626;
+      border: 2px solid #0A0A0A;
+      /* Padding effect */
+      border-radius: 4px;
+    }
+
+    html.light ::-webkit-scrollbar-thumb {
+      background: #D4D4D4;
+      border: 2px solid #FAFAFA;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #E24A37;
+    }
+
+    /* Selection Color - Premium Red */
+    ::selection {
+      background-color: rgba(226, 74, 55, 0.3);
+      color: inherit;
+    }
+
+    /* Remove all default border radius if strictly following angular design, 
+         but allow small radius for 'premium' softness if needed. 
+         Keeping it 0px for now as per brand. */
+    * {
+      border-radius: 0px !important;
+    }
+
+    /* Vertical Text Utility */
+    .vertical-text {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+    }
+
+    /* Global Grid Overlay */
+    .bg-grid-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+      background-size: 50px 50px;
+      /* Larger grid for cleaner look */
+      mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+      opacity: 0.03;
+      /* More subtle */
+    }
+
+    html.dark .bg-grid-fixed {
+      background-image: linear-gradient(to right, #404040 1px, transparent 1px), linear-gradient(to bottom, #404040 1px, transparent 1px);
+      opacity: 0.04;
+    }
+
+    html.light .bg-grid-fixed {
+      background-image: linear-gradient(to right, #000000 1px, transparent 1px), linear-gradient(to bottom, #000000 1px, transparent 1px);
+      opacity: 0.02;
+    }
+  </style>
+  <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@18.2.0",
@@ -254,9 +282,11 @@
 }
 </script>
 </head>
-  <body>
-    <div class="bg-grid-fixed"></div>
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+
+<body>
+  <div class="bg-grid-fixed"></div>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
 </html>
