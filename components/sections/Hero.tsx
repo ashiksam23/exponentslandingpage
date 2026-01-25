@@ -6,37 +6,12 @@ import { SITE_CONFIG } from '../../constants';
 export const Hero: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [timeLeft, setTimeLeft] = useState<string>("00:00:00:00");
-
   // Parallax Hooks
   const { scrollY } = useScroll();
   // Grid moves down at 40% of scroll speed (appears to move up slower than foreground)
   const gridY = useTransform(scrollY, [0, 1000], [0, 400]);
   // Opacity fade out as you scroll down
   const gridOpacity = useTransform(scrollY, [0, 600], [1, 0]);
-
-  // Countdown Timer Logic (Simulating time slipping away)
-  useEffect(() => {
-    const updateTimer = () => {
-      const now = new Date();
-      const endOfDay = new Date();
-      endOfDay.setHours(23, 59, 59, 999);
-
-      const diff = endOfDay.getTime() - now.getTime();
-
-      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((diff % (1000 * 60)) / 1000);
-      const ms = Math.floor((diff % 1000) / 10);
-
-      setTimeLeft(
-        `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}:${ms.toString().padStart(2, '0')}`
-      );
-    };
-
-    const interval = setInterval(updateTimer, 30);
-    return () => clearInterval(interval);
-  }, []);
 
   // Canvas Animation Effect with Parallax
   useEffect(() => {
@@ -247,24 +222,21 @@ export const Hero: React.FC = () => {
           <div className="absolute inset-0 bg-brand-red/10 blur-[60px] -z-10 opacity-60 dark:opacity-30 rounded-full scale-150"></div>
         </motion.div>
 
-        {/* System Timer / Ticker */}
+        {/* Social Proof Badge */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
           className="flex flex-col items-center mb-12"
         >
-          <div className="flex items-center gap-3 px-4 py-1.5 border border-brand-neutral-200 dark:border-brand-neutral-800 bg-white/50 dark:bg-black/40 backdrop-blur-md mb-3 rounded-full">
+          <div className="flex items-center gap-3 px-5 py-2.5 border border-brand-neutral-200 dark:border-brand-neutral-800 bg-white/50 dark:bg-black/40 backdrop-blur-md">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-red opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-red"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
             </span>
-            <span className="text-[10px] uppercase tracking-[0.2em] font-mono text-brand-neutral-500 dark:text-brand-neutral-400">
-              Opportunity Cost
+            <span className="text-sm text-brand-neutral-600 dark:text-brand-neutral-300">
+              <strong className="text-brand-black dark:text-white">127 founders</strong> reclaimed 20+ hrs/week
             </span>
-          </div>
-          <div className="font-mono text-xl sm:text-2xl text-brand-black dark:text-white tracking-[0.15em] tabular-nums opacity-90 font-light">
-            {timeLeft}
           </div>
         </motion.div>
 
@@ -298,7 +270,7 @@ export const Hero: React.FC = () => {
               onClick={() => {
                 import('../../utils/analytics').then(({ Analytics }) => {
                   Analytics.track('hero_cta_clicked', { location: 'hero' });
-                  alert("Initializing Sequence... (This would open the checkout flow)");
+                  window.open(SITE_CONFIG.ctaLink, '_blank');
                 });
               }}
             >

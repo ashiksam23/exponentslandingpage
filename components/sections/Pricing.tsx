@@ -114,7 +114,7 @@ export const Pricing: React.FC = () => {
                           tier: tier.name,
                           price: tier.price
                         });
-                        alert(`Initializing ${tier.name} Protocol... (This would open Stripe checkout)`);
+                        window.open('https://calendar.app.google/w9U9vMTWTaDKa9gi9', '_blank');
                       });
                     }}
                   >
