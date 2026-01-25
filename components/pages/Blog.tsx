@@ -12,7 +12,7 @@ const POSTS = [
         title: 'Operational Sovereignty: The Founder\'s Guide to Administrative Freedom',
         excerpt: 'Stop being the bottleneck. Learn how to install Operational Sovereignty and decouple your genius from administrative friction.',
         date: 'Jan 24, 2026',
-        readTime: '6 min read',
+        readTime: '12 min read',
         image: '/assets/blog/operational-sovereignty.png',
         category: 'Strategy',
         route: 'post-sovereignty' as const
@@ -22,20 +22,10 @@ const POSTS = [
         title: 'The New Chief of Staff: How AI is Redefining Executive Support in 2026',
         excerpt: 'The traditional EA is dead. Discover how the AI Chief of Staff is redefining executive support, context management, and founder productivity.',
         date: 'Jan 24, 2026',
-        readTime: '5 min read',
+        readTime: '10 min read',
         image: '/assets/blog/ai-chief-of-staff.png',
         category: 'Intelligence',
         route: 'post-cos' as const
-    },
-    {
-        id: 'blueprint',
-        title: 'The Operational Sovereignty Blueprint',
-        excerpt: 'How to scale a service firm without bloating headcount using AI-augmented operations and human-in-the-loop workflows.',
-        date: 'May 22, 2025',
-        readTime: '8 min read',
-        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop',
-        category: 'Framework',
-        route: 'blueprint' as const
     }
 ];
 
