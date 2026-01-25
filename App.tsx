@@ -8,20 +8,38 @@ import { Blog } from './components/pages/Blog';
 import { PostSovereignty } from './components/pages/PostSovereignty';
 import { PostCoS } from './components/pages/PostCoS';
 
+// Route configuration
+const ROUTES: Record<string, 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos'> = {
+  '/': 'home',
+  '/blueprint': 'blueprint',
+  '/case-studies': 'casestudies',
+  '/blog': 'blog',
+  '/blog/operational-sovereignty': 'post-sovereignty',
+  '/blog/ai-chief-of-staff': 'post-cos',
+};
+
+// Reverse lookup for navigation
+const PAGE_TO_PATH: Record<string, string> = {
+  'home': '/',
+  'blueprint': '/blueprint',
+  'casestudies': '/case-studies',
+  'blog': '/blog',
+  'post-sovereignty': '/blog/operational-sovereignty',
+  'post-cos': '/blog/ai-chief-of-staff',
+};
+
+function getPageFromPath(pathname: string): 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos' {
+  return ROUTES[pathname] || 'home';
+}
+
 function App() {
   // Default to dark mode
   const [isDark, setIsDark] = useState(true);
 
-  // Custom Hash Router State
+  // Path-based Router State
   const [currentPage, setCurrentPage] = useState<'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos'>(() => {
     if (typeof window !== 'undefined') {
-      const hash = window.location.hash;
-      if (hash === '#blueprint') return 'blueprint';
-      if (hash === '#casestudies') return 'casestudies';
-      if (hash === '#blog') return 'blog';
-      if (hash === '#post-sovereignty') return 'post-sovereignty';
-      if (hash === '#post-cos') return 'post-cos';
-      return 'home';
+      return getPageFromPath(window.location.pathname);
     }
     return 'home';
   });
@@ -31,41 +49,24 @@ function App() {
     setIsDark(!isDark);
   };
 
-  // Navigation Handler using Hash
+  // Navigation Handler using History API
   const navigateTo = (page: 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos') => {
-    if (page === 'home') {
-      window.location.hash = '';
-    } else {
-      window.location.hash = page;
-    }
+    const path = PAGE_TO_PATH[page] || '/';
+    window.history.pushState({}, '', path);
     window.scrollTo(0, 0);
     setCurrentPage(page);
+
+    // Track Page View
+    import('./utils/analytics').then(({ Analytics }) => {
+      Analytics.pageView(page);
+    });
   };
 
-  // Listen for browser back/forward buttons (Hash Change)
+  // Listen for browser back/forward buttons (popstate)
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      let page = 'home';
-
-      if (hash === '#blueprint') {
-        setCurrentPage('blueprint');
-        page = 'blueprint';
-      } else if (hash === '#casestudies') {
-        setCurrentPage('casestudies');
-        page = 'casestudies';
-      } else if (hash === '#blog') {
-        setCurrentPage('blog');
-        page = 'blog';
-      } else if (hash === '#post-sovereignty') {
-        setCurrentPage('post-sovereignty');
-        page = 'post-sovereignty';
-      } else if (hash === '#post-cos') {
-        setCurrentPage('post-cos');
-        page = 'post-cos';
-      } else {
-        setCurrentPage('home');
-      }
+    const handlePopState = () => {
+      const page = getPageFromPath(window.location.pathname);
+      setCurrentPage(page);
       window.scrollTo(0, 0);
 
       // Track Page View
@@ -74,11 +75,9 @@ function App() {
       });
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    // Initial check in case of deep linking
-    handleHashChange();
+    window.addEventListener('popstate', handlePopState);
 
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   // Theme Effect
