@@ -4,17 +4,23 @@ import { Footer } from './components/sections/Footer';
 import { Home } from './components/pages/Home';
 import { BlogPost } from './components/pages/BlogPost';
 import { CaseStudies } from './components/pages/CaseStudies';
+import { Blog } from './components/pages/Blog';
+import { PostSovereignty } from './components/pages/PostSovereignty';
+import { PostCoS } from './components/pages/PostCoS';
 
 function App() {
   // Default to dark mode
   const [isDark, setIsDark] = useState(true);
 
   // Custom Hash Router State
-  const [currentPage, setCurrentPage] = useState<'home' | 'blueprint' | 'casestudies'>(() => {
+  const [currentPage, setCurrentPage] = useState<'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos'>(() => {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash;
       if (hash === '#blueprint') return 'blueprint';
       if (hash === '#casestudies') return 'casestudies';
+      if (hash === '#blog') return 'blog';
+      if (hash === '#post-sovereignty') return 'post-sovereignty';
+      if (hash === '#post-cos') return 'post-cos';
       return 'home';
     }
     return 'home';
@@ -26,13 +32,11 @@ function App() {
   };
 
   // Navigation Handler using Hash
-  const navigateTo = (page: 'home' | 'blueprint' | 'casestudies') => {
+  const navigateTo = (page: 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos') => {
     if (page === 'home') {
       window.location.hash = '';
-    } else if (page === 'blueprint') {
-      window.location.hash = 'blueprint';
-    } else if (page === 'casestudies') {
-      window.location.hash = 'casestudies';
+    } else {
+      window.location.hash = page;
     }
     window.scrollTo(0, 0);
     setCurrentPage(page);
@@ -47,14 +51,22 @@ function App() {
       if (hash === '#blueprint') {
         setCurrentPage('blueprint');
         page = 'blueprint';
-        window.scrollTo(0, 0);
       } else if (hash === '#casestudies') {
         setCurrentPage('casestudies');
         page = 'casestudies';
-        window.scrollTo(0, 0);
+      } else if (hash === '#blog') {
+        setCurrentPage('blog');
+        page = 'blog';
+      } else if (hash === '#post-sovereignty') {
+        setCurrentPage('post-sovereignty');
+        page = 'post-sovereignty';
+      } else if (hash === '#post-cos') {
+        setCurrentPage('post-cos');
+        page = 'post-cos';
       } else {
         setCurrentPage('home');
       }
+      window.scrollTo(0, 0);
 
       // Track Page View
       import('./utils/analytics').then(({ Analytics }) => {
@@ -93,6 +105,9 @@ function App() {
       {currentPage === 'home' && <Home />}
       {currentPage === 'blueprint' && <BlogPost onNavigate={navigateTo} />}
       {currentPage === 'casestudies' && <CaseStudies onNavigate={navigateTo} />}
+      {currentPage === 'blog' && <Blog onNavigate={navigateTo} />}
+      {currentPage === 'post-sovereignty' && <PostSovereignty onNavigate={navigateTo} />}
+      {currentPage === 'post-cos' && <PostCoS onNavigate={navigateTo} />}
 
       <Footer />
     </main>

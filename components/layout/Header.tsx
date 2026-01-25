@@ -5,8 +5,8 @@ import { triggerHaptic } from '../../utils/haptics';
 interface HeaderProps {
   isDark: boolean;
   toggleTheme: () => void;
-  onNavigate: (page: 'home' | 'blueprint' | 'casestudies') => void;
-  currentPage: 'home' | 'blueprint' | 'casestudies';
+  onNavigate: (page: 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos') => void;
+  currentPage: 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos';
 }
 
 export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme, onNavigate, currentPage }) => {
@@ -76,6 +76,12 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme, onNavigate,
             </button>
             <button onClick={() => handleScrollTo('pricing')} className="text-xs font-bold uppercase tracking-widest text-brand-neutral-500 hover:text-brand-black dark:text-brand-neutral-400 dark:hover:text-white transition-colors duration-300 ease-premium">
               Pricing
+            </button>
+            <button
+              onClick={() => onNavigate('blog')}
+              className={`text-xs font-bold uppercase tracking-widest hover:text-brand-black dark:hover:text-white transition-colors duration-300 ease-premium ${currentPage === 'blog' ? 'text-brand-black dark:text-white' : 'text-brand-neutral-500 dark:text-brand-neutral-400'}`}
+            >
+              Intelligence
             </button>
             <button
               onClick={() => onNavigate('blueprint')}
