@@ -1,20 +1,67 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# ExponentOS Landing Page
 
-# Run and deploy your AI Studio app
+The official landing page for **ExponentOS** — The Leverage Operating System for Founders.
 
-This contains everything you need to run your app locally.
+## About ExponentOS
 
-View your app in AI Studio: https://ai.studio/apps/drive/1l6JUVOUetG0MpfRJD9Rc9iiDj4vwFCv2
+ExponentOS is an AI-driven operational platform designed to remove administrative bottlenecks for high-performance founders. We combine AI processing with elite human verification to deliver operational sovereignty.
+
+### Key Features
+- **Inbox Zero System** - Autonomous email triage and response drafting
+- **Content Repurposing Engine** - Transform one piece of content into 42+ assets
+- **Financial Operations** - Automated A/R, invoice chasing, and reconciliation
+- **Calendar Sovereignty** - Protect deep work blocks automatically
+
+## Tech Stack
+
+- **Framework**: React 18 + TypeScript
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Build Tool**: Vite
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
+**Prerequisites:** Node.js 18+
 
+```bash
+# Install dependencies
+npm install
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## Project Structure
+
+```
+├── components/
+│   ├── layout/        # Header, Footer, StickyCTA
+│   ├── pages/         # Home, Blog, CaseStudies
+│   ├── sections/      # Hero, Pricing, FAQ, Testimonials
+│   └── ui/            # Button, Section, ThemeToggle
+├── content/
+│   └── blog/          # Blog post markdown files
+├── Agents/            # WebsiteForge AI agent documentation
+├── utils/             # Analytics, haptics utilities
+└── constants.ts       # Site configuration
+```
+
+## Deployment
+
+The site is built as a static SPA and can be deployed to any static hosting:
+- Vercel
+- Netlify
+- GitHub Pages
+- Cloudflare Pages
+
+## License
+
+Proprietary - All Rights Reserved
+
+---
+
+Built with the [WebsiteForge](./Agents/README.md) multi-agent system.
