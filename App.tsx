@@ -7,15 +7,17 @@ import { CaseStudies } from './components/pages/CaseStudies';
 import { Blog } from './components/pages/Blog';
 import { PostSovereignty } from './components/pages/PostSovereignty';
 import { PostCoS } from './components/pages/PostCoS';
+import { CockpitRule } from './components/pages/CockpitRule';
 
 // Route configuration
-const ROUTES: Record<string, 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos'> = {
+const ROUTES: Record<string, 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos' | 'cockpit-rule'> = {
   '/': 'home',
   '/blueprint': 'blueprint',
   '/case-studies': 'casestudies',
   '/blog': 'blog',
   '/blog/operational-sovereignty': 'post-sovereignty',
   '/blog/ai-chief-of-staff': 'post-cos',
+  '/cockpit-rule': 'cockpit-rule',
 };
 
 // Reverse lookup for navigation
@@ -26,9 +28,10 @@ const PAGE_TO_PATH: Record<string, string> = {
   'blog': '/blog',
   'post-sovereignty': '/blog/operational-sovereignty',
   'post-cos': '/blog/ai-chief-of-staff',
+  'cockpit-rule': '/cockpit-rule',
 };
 
-function getPageFromPath(pathname: string): 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos' {
+function getPageFromPath(pathname: string): 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos' | 'cockpit-rule' {
   return ROUTES[pathname] || 'home';
 }
 
@@ -37,7 +40,7 @@ function App() {
   const [isDark, setIsDark] = useState(true);
 
   // Path-based Router State
-  const [currentPage, setCurrentPage] = useState<'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos'>(() => {
+  const [currentPage, setCurrentPage] = useState<'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos' | 'cockpit-rule'>(() => {
     if (typeof window !== 'undefined') {
       return getPageFromPath(window.location.pathname);
     }
@@ -50,7 +53,7 @@ function App() {
   };
 
   // Navigation Handler using History API
-  const navigateTo = (page: 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos') => {
+  const navigateTo = (page: 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos' | 'cockpit-rule') => {
     const path = PAGE_TO_PATH[page] || '/';
     window.history.pushState({}, '', path);
     window.scrollTo(0, 0);
@@ -107,6 +110,7 @@ function App() {
       {currentPage === 'blog' && <Blog onNavigate={navigateTo} />}
       {currentPage === 'post-sovereignty' && <PostSovereignty onNavigate={navigateTo} />}
       {currentPage === 'post-cos' && <PostCoS onNavigate={navigateTo} />}
+      {currentPage === 'cockpit-rule' && <CockpitRule onNavigate={navigateTo} />}
 
       <Footer />
     </main>

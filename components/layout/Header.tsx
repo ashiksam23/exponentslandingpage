@@ -5,8 +5,8 @@ import { triggerHaptic } from '../../utils/haptics';
 interface HeaderProps {
   isDark: boolean;
   toggleTheme: () => void;
-  onNavigate: (page: 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos') => void;
-  currentPage: 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos';
+  onNavigate: (page: 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos' | 'cockpit-rule') => void;
+  currentPage: 'home' | 'blueprint' | 'casestudies' | 'blog' | 'post-sovereignty' | 'post-cos' | 'cockpit-rule';
 }
 
 export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme, onNavigate, currentPage }) => {
@@ -79,7 +79,7 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme, onNavigate,
             </button>
             <button
               onClick={() => onNavigate('blog')}
-              className={`text-xs font-bold uppercase tracking-widest hover:text-brand-black dark:hover:text-white transition-colors duration-300 ease-premium ${currentPage === 'blog' ? 'text-brand-black dark:text-white' : 'text-brand-neutral-500 dark:text-brand-neutral-400'}`}
+              className={`text-xs font-bold uppercase tracking-widest hover:text-brand-black dark:hover:text-white transition-colors duration-300 ease-premium ${currentPage === 'blog' || currentPage === 'post-sovereignty' || currentPage === 'post-cos' ? 'text-brand-black dark:text-white' : 'text-brand-neutral-500 dark:text-brand-neutral-400'}`}
             >
               Intelligence
             </button>
@@ -88,6 +88,12 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme, onNavigate,
               className={`text-xs font-bold uppercase tracking-widest hover:text-brand-red transition-colors duration-300 ease-premium flex items-center gap-1 ${currentPage === 'blueprint' ? 'text-brand-red' : 'text-brand-neutral-500 dark:text-brand-neutral-400'}`}
             >
               Blueprint <span className="w-1.5 h-1.5 bg-brand-red rounded-full animate-pulse"></span>
+            </button>
+            <button
+              onClick={() => onNavigate('cockpit-rule')}
+              className={`text-xs font-bold uppercase tracking-widest hover:text-brand-red transition-colors duration-300 ease-premium flex items-center gap-1 ${currentPage === 'cockpit-rule' ? 'text-brand-red' : 'text-brand-neutral-500 dark:text-brand-neutral-400'}`}
+            >
+              Cockpit Rule <span className="w-1.5 h-1.5 bg-brand-red rounded-full animate-pulse"></span>
             </button>
           </nav>
 
